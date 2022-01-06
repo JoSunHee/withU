@@ -1,6 +1,7 @@
 package com.example.withu.service.impl;
 
 import com.example.withu.dao.ProtectDogDAO;
+import com.example.withu.dto.HealthCareDTO;
 import com.example.withu.dto.ProtectDogDTO;
 import com.example.withu.service.ProtectDogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class ProtectDogServiceImpl implements ProtectDogService {
     @Override
     public String findshelternamebyemail(String email) {
         return protectDogDAO.findshelternamebyemail(email);
+    }
+
+    @Override
+    public List<HealthCareDTO> showHealthCare(int dogno) {
+        return protectDogDAO.showHealthCare(dogno);
     }
 
 }
