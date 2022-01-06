@@ -6,11 +6,15 @@
     </select>
 
     <insert id="insertpost" parameterType="com.example.withu.dto.CommunityPostDTO">
-        insert into communitypost values (#{useremail},#{boardno}, #{posttitle}, #{postcontent})
+        insert into communitypost(useremail, boardno, postcontent, nickname) values (#{useremail},#{boardno},#{postcontent}, #{nickname})
     </insert>
 
     <update id="updatepost" parameterType="com.example.withu.dto.CommunityPostDTO">
 /*postdate 현재 시간으로 업데이트*/
         update communitypost set posttitle=#{posttitle}, postcontent=#{postcontent}
     </update>
+
+    <select id="listDao" resultType="com.example.withu.dto.CommunityPostDTO">
+        select * from communitypost
+    </select>
 </mapper>

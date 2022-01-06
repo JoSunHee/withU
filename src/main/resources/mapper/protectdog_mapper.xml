@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.withu.dao.ProtectDogDAO">
+    <insert id="registdog" parameterType="com.example.withu.dto.ProtectDogDTO">
+        insert into protectdog(useremail, dogkind, dogage, gender, neutralization,dogspecific, place, noticedate, noticeend)
+        values (#{useremail}, #{dogkind}, #{dogage}, #{gender}, #{neutralization}, #{specific}, #{place}, #{noticedate}, #{noticeend})
+    </insert>
+
+    <select id="showDogAll" resultType="com.example.withu.dto.ProtectDogDTO">
+        select * from protectdog
+    </select>
+
+    <select id="showdogdetail" resultType="com.example.withu.dto.ProtectDogDTO">
+        select * from protectdog where protectdogno=#{dogno}
+    </select>
+    
+    <update id="updatedog" parameterType="com.example.withu.dto.ProtectDogDTO">
+        update communitypost set useremail=#{useremail}, dogkind=#{dogkind}, dogage=#{dogage}, gender=#{gender}, neutralization=#{neutralization}
+                               , dogspecific=#{specific}, adoptionstate=#{adoptionstate}, place=#{place}
+    </update>
+
+    <select id="findshelternamebyemail" resultType="String">
+        select sheltername from sheltermember where email=#{email}
+    </select>
+
+</mapper>

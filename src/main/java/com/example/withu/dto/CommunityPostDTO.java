@@ -12,6 +12,8 @@ public class CommunityPostDTO {
     private String useremail;
     private int boardno;
     private String posttitle;
+    private String nickname;
+    //private String posttitle;
     private String postcontent;
     private String postdate;
     private String postdelete;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.withu.dao.MemberDao">
+   <insert id="registMember" parameterType="com.example.withu.dto.MemberDTO">
+       insert into member(email, password, type) values (#{email}, #{password}, #{type})
+   </insert>
+
+    <insert id="registergenMember" parameterType="com.example.withu.dto.GenMemberDTO">
+        insert into genmember(nickname, userphone, useraddress, email) values(#{nickname}, #{userphone}, #{useraddress}, #{email})
+    </insert>
+
+    <insert id="registershelterMember" parameterType="com.example.withu.dto.ShelterMemberDTO">
+        insert into sheltermember(sheltername, userphone, shelterlocation, operationtime, profile, email) values (#{sheltername}, #{userphone}, #{shelterlocation}, #{operationtime}, #{profile}, #{email})
+    </insert>
+
+    <select id="memberlogin" parameterType="com.example.withu.dto.MemberDTO" resultType="int">
+        select count(*) from member where email=#{email} and password=#{password}
+    </select>
+
+    <select id="membertypecheck" parameterType="String" resultType="int">
+        select type from member where email=#{email}
+    </select>
+
+    <select id="getGenMemberInfo" resultType="com.example.withu.dto.GenMemberDTO">
+        select * from genmember where email=#{email}
+    </select>
+
+</mapper>
