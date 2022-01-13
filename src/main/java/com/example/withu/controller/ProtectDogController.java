@@ -1,6 +1,7 @@
 package com.example.withu.controller;
 
 import com.example.withu.dto.CommunityPostDTO;
+import com.example.withu.dto.HealthCareDTO;
 import com.example.withu.dto.ProtectDogDTO;
 import com.example.withu.service.ProtectDogService;
 import org.apache.tomcat.jni.Local;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -43,7 +45,19 @@ public class ProtectDogController {
             int dogno=dto.getProtectdogno();
             String email=dto.getUseremail();
             String sheltername=protectDogService.findshelternamebyemail(email);
+            List<HealthCareDTO> care=protectDogService.showHealthCare(dogno);
 
+            String vaccinedate="",vaccinationname="",operationdate="",operationname="",medicationdate="",medicationname="";
+            System.out.println("사이즈" +care.size());
+            for(int j=0;j<care.size();j++){
+                vaccinedate+=vaccinedate+care.get(j).getVaccinedate();
+                vaccinationname+=care.get(j).getVaccinationname();
+                operationdate+=care.get(j).getOperationdate();
+                operationname+=care.get(j).getOperationname();
+                medicationdate+=care.get(j).getMedicationdate();
+                medicationname+=care.get(j).getMedicationname();
+
+            }
 
             // json객체.put("변수명",값)
             row.put("noticedate", dto.getNoticedate());     //공고날짜 시작일
@@ -56,6 +70,14 @@ public class ProtectDogController {
             row.put("dogkind", dto.getDogkind());           //품종
             row.put("gender", dto.getGender());             //성별
             row.put("protectdogno",dto.getProtectdogno());  //공고번호
+
+            row.put("vaccinedate",vaccinedate);
+            row.put("vaccinationname",vaccinationname);
+            row.put("operationdate",operationdate);
+            row.put("operationname",operationname);
+            row.put("medicationdate",medicationdate);
+            row.put("medicationname",medicationname);
+
             // 배열에 추가
             // json배열.add(인덱스,json객체)
             jArray.add(i,row);
@@ -162,7 +184,8 @@ public class ProtectDogController {
         String operationname=request.getParameter("operationname")==null?"수술x2":request.getParameter("operationname");
         String medicationdate=request.getParameter("medicationdate")==null?"투약x":request.getParameter("medicationdate");
         String medicationname=request.getParameter("medicationname")==null?"투약x2":request.getParameter("medicationname");
-        String dogno=request.getParameter("protectdogno");
+        int dogno=Integer.parseInt(request.getParameter("protectdogno"));
+
         System.out.println("vaccinedate: "+vaccinedate);        //접종일
         System.out.println("vaccinationname :"+vaccinename);    //접종명
         System.out.println("operationdate :"+operationdate);    //수술일
@@ -170,6 +193,17 @@ public class ProtectDogController {
         System.out.println("medicationdate :"+medicationdate);  //투약일
         System.out.println("medicationname :"+medicationname);  //약품명
         System.out.println("protectdogno :"+dogno);             //강아지 공고번호
+
+        HealthCareDTO dto=new HealthCareDTO();
+        dto.setVaccinedate(vaccinedate);
+        dto.setVaccinationname(vaccinename);
+        dto.setOperationdate(operationdate);
+        dto.setOperationname(operationname);
+        dto.setMedicationdate(medicationdate);
+        dto.setMedicationname(medicationname);
+        dto.setProtectdogno(dogno);
+
+        protectDogService.registHealtCare(dto);
 
         return "redirect:/showdogdetail/"+dogno;
     }

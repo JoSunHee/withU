@@ -13,4 +13,5 @@ public interface ProtectDogDAO {
     void updatedog(ProtectDogDTO protectDogDTO);
     String findshelternamebyemail(String email);
     List<HealthCareDTO> showHealthCare(int dogno);
+    void registHealtCare(HealthCareDTO dto);
 }

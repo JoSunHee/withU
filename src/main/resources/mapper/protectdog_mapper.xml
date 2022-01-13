@@ -23,4 +23,14 @@
         select sheltername from sheltermember where email=#{email}
     </select>
 
+    <select id="showHealthCare" resultType="com.example.withu.dto.HealthCareDTO">
+        select * from healthcare where protectdogno=#{dogno}
+    </select>
+
+    <insert id="registHealtCare" parameterType="com.example.withu.dto.HealthCareDTO">
+        insert into healthcare(vaccinedate, vaccinationname, operationname, operationdate, medicationdate,medicationname, protectdog)
+        values (#{vaccinedate}, #{vaccinationname}, #{operationname}, #{operationdate}, #{medicationdate}, #{medicationname}, #{protectdog})
+    </insert>
+
+
 </mapper>

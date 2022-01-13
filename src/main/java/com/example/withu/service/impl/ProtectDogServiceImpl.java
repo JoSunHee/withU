@@ -45,4 +45,7 @@ public class ProtectDogServiceImpl implements ProtectDogService {
         return protectDogDAO.showHealthCare(dogno);
     }
 
+    @Override
+    public void registHealtCare(HealthCareDTO dto) {  protectDogDAO.registHealtCare(dto);  }
+
 }
