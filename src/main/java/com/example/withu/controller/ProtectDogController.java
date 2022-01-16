@@ -48,15 +48,14 @@ public class ProtectDogController {
             List<HealthCareDTO> care=protectDogService.showHealthCare(dogno);
 
             String vaccinedate="",vaccinationname="",operationdate="",operationname="",medicationdate="",medicationname="";
-            System.out.println("사이즈" +care.size());
             for(int j=0;j<care.size();j++){
-                vaccinedate+=vaccinedate+care.get(j).getVaccinedate();
+                vaccinedate+=care.get(j).getVaccinedate();
                 vaccinationname+=care.get(j).getVaccinationname();
                 operationdate+=care.get(j).getOperationdate();
                 operationname+=care.get(j).getOperationname();
                 medicationdate+=care.get(j).getMedicationdate();
                 medicationname+=care.get(j).getMedicationname();
-
+                System.out.println("강아지 번호" +care.get(j).getProtectdogno()+"/ 강아지 백신:"+vaccinedate);
             }
 
             // json객체.put("변수명",값)
@@ -178,12 +177,12 @@ public class ProtectDogController {
     public String writehealthcare(HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println("동물 건강일지 작성");
 
-        String vaccinedate= request.getParameter("vaccinationdate")==null?"접종x":request.getParameter("vaccinationdate");
-        String vaccinename=request.getParameter("vaccinationname")==null?"접종x2":request.getParameter("vaccinationname");
-        String operationdate=request.getParameter("operationdate")==null?"수술x":request.getParameter("operationdate");
-        String operationname=request.getParameter("operationname")==null?"수술x2":request.getParameter("operationname");
-        String medicationdate=request.getParameter("medicationdate")==null?"투약x":request.getParameter("medicationdate");
-        String medicationname=request.getParameter("medicationname")==null?"투약x2":request.getParameter("medicationname");
+        String vaccinedate= request.getParameter("vaccinationdate")==null?"":request.getParameter("vaccinationdate");
+        String vaccinename=request.getParameter("vaccinationname")==null?"":request.getParameter("vaccinationname");
+        String operationdate=request.getParameter("operationdate")==null?"":request.getParameter("operationdate");
+        String operationname=request.getParameter("operationname")==null?"":request.getParameter("operationname");
+        String medicationdate=request.getParameter("medicationdate")==null?"":request.getParameter("medicationdate");
+        String medicationname=request.getParameter("medicationname")==null?"":request.getParameter("medicationname");
         int dogno=Integer.parseInt(request.getParameter("protectdogno"));
 
         System.out.println("vaccinedate: "+vaccinedate);        //접종일
