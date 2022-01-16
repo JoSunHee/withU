@@ -174,7 +174,7 @@ public class ProtectDogController {
 
     //보호동물 건강일지 작성
     @RequestMapping(value = "/writehealthcare", method = RequestMethod.POST)
-    public String writehealthcare(HttpServletRequest request) throws UnsupportedEncodingException {
+    public void writehealthcare(HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println("동물 건강일지 작성");
 
         String vaccinedate= request.getParameter("vaccinationdate")==null?"":request.getParameter("vaccinationdate");
@@ -204,6 +204,6 @@ public class ProtectDogController {
 
         protectDogService.registHealtCare(dto);
 
-        return "redirect:/showdogdetail/"+dogno;
+        return;
     }
 }
