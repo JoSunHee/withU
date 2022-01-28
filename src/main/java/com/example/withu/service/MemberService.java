@@ -12,6 +12,7 @@ public interface MemberService {
     int memberlogin(MemberDTO memberDTO);    //로그인
     int membertypecheck(String email);
     GenMemberDTO getGenMemberInfo(String email);
+    List<ShelterMemberDTO> showshleterAll();
 /*
     테스트
     List<MemberModel> printMember();

@@ -24,7 +24,7 @@ public class BoardController {
     CommunityPostService postService;
 
     @RequestMapping(value = "/selectpostAll/{boardno}", produces="application/json;charset=utf-8")
-    public @ResponseBody JSONObject selectpostAll(@PathVariable int boardno, HttpServletRequest request){
+    public @ResponseBody JSONArray selectpostAll(@PathVariable int boardno, HttpServletRequest request){
         JSONObject jsonMain =new JSONObject();
         //List<CommunityPostDTO> postAll=postService.selectPostAll(boardno);
         System.out.println("커뮤니티 게시글 목록 연결됨");
@@ -43,7 +43,7 @@ public class BoardController {
         }
         // json객체에 배열을 넣음
         jsonMain.put("MyItem", jArray);
-        return jsonMain;
+        return jArray;
 
     }
 

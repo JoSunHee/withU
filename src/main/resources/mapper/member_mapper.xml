@@ -25,4 +25,9 @@
         select * from genmember where email=#{email}
     </select>
 
+    <select id="showshleterAll" resultType="com.example.withu.dto.ShelterMemberDTO">
+        select * from sheltermember
+    </select>
+
+
 </mapper>

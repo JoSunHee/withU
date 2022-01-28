@@ -70,7 +70,7 @@ public class ProtectDogController {
             row.put("gender", dto.getGender());             //성별
             row.put("protectdogno",dto.getProtectdogno());  //공고번호
 
-            row.put("vaccinedate",vaccinedate);
+            row.put("vaccinationdate",vaccinedate);
             row.put("vaccinationname",vaccinationname);
             row.put("operationdate",operationdate);
             row.put("operationname",operationname);

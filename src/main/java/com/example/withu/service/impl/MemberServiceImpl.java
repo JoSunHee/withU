@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.getGenMemberInfo(email);
     }
 
+    @Override
+    public List<ShelterMemberDTO> showshleterAll() {
+        return memberDao.showshleterAll();
+    }
+
 
     /*
     테스트

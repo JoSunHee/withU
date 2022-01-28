@@ -1,9 +1,6 @@
 package com.example.withu.controller;
 
-import com.example.withu.dto.CommunityPostDTO;
-import com.example.withu.dto.GenMemberDTO;
-import com.example.withu.dto.MemberDTO;
-import com.example.withu.dto.ShelterMemberDTO;
+import com.example.withu.dto.*;
 import com.example.withu.service.MemberService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -131,15 +128,16 @@ public class MemberController {
             int type=memberService.membertypecheck(email);
             if(type==1){    //일반사용자가 로그인 했을 시 클라에게 보내줄 값
                 GenMemberDTO genMemberDTO=memberService.getGenMemberInfo(email);
-                jsonMain.put("nickname",genMemberDTO.getNickname());
-                jsonMain.put("userphone",genMemberDTO.getUserphone());
-                jsonMain.put("useraddress",genMemberDTO.getUseraddress());
-                jsonMain.put("email",genMemberDTO.getEmail());
+                jsonMain.put("password",password);
+                jsonMain.put("email",email);
+                System.out.println("type: "+type);
+                jsonMain.put("type", "1");
             } else {        //보호소 사용자가 로그인 했을 시 클라에게 보내줄 값
-
+                jsonMain.put("password",password);
+                jsonMain.put("email",email);
+                System.out.println("type: "+type);
+                jsonMain.put("type", "2");
             }
-            System.out.println("type: "+type);
-            jsonMain.put("check", 1);
             return jsonMain;
         } else{
             return null;
@@ -147,6 +145,41 @@ public class MemberController {
         }
 
         // json객체에 배열을 넣음
+    }
+
+    //보호소 리스트
+    @RequestMapping(value = "/showShelterAll", produces="application/json;charset=utf-8")
+    public @ResponseBody JSONArray selectpostAll(HttpServletRequest request){
+        JSONObject jsonMain =new JSONObject();
+        //List<CommunityPostDTO> postAll=postService.selectPostAll(boardno);
+        System.out.println("보호소 목록 접속중");
+
+        //date ,place, dogkind, gender
+        List<ShelterMemberDTO> shememDTO=memberService.showshleterAll();
+
+        JSONArray jArray =new JSONArray();
+
+        for(int i=0; i<shememDTO.size(); i++){
+            ShelterMemberDTO dto=shememDTO.get(i);
+            JSONObject row =new JSONObject();
+
+            // json객체.put("변수명",값)
+            row.put("email", dto.getEmail());
+            row.put("sheltername", dto.getSheltername());
+            row.put("userphone",dto.getUserphone());
+            row.put("shelterlocation",dto.getShelterlocation());
+            row.put("operationtime",dto.getOperationtime());
+            row.put("profile",dto.getProfile());
+
+
+            // 배열에 추가
+            // json배열.add(인덱스,json객체)
+            jArray.add(i,row);
+        }
+        // json객체에 배열을 넣음
+        //jsonMain.put("AnimalItem", jArray);
+        return jArray;
+
     }
 
 
