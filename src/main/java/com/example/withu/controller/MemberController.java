@@ -134,6 +134,8 @@ public class MemberController {
                 System.out.println("type: "+type);
                 jsonMain.put("type", "1");
             } else {        //보호소 사용자가 로그인 했을 시 클라에게 보내줄 값
+                ShelterMemberDTO shelterMemberDTO=memberService.getShelterMemberInfo(email);
+                jsonMain.put("nickname",shelterMemberDTO.getSheltername());
                 jsonMain.put("password",password);
                 jsonMain.put("email",email);
                 System.out.println("type: "+type);

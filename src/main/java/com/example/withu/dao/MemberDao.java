@@ -15,4 +15,5 @@ public interface MemberDao {
     int membertypecheck(String email);
     GenMemberDTO getGenMemberInfo(String email);
     List<ShelterMemberDTO> showshleterAll();
+    ShelterMemberDTO getShelterMemberInfo(String email);
 }

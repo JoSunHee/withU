@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AdoptionFormDAO {
     List<AdoptionFromDTO> selectformlistAll(String sheltername);
+    void insertform(AdoptionFromDTO adoptionFromDTO);
 }

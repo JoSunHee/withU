@@ -46,6 +46,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public ShelterMemberDTO getShelterMemberInfo(String email) {
+        return memberDao.getShelterMemberInfo(email);
+    }
+
+    @Override
     public List<ShelterMemberDTO> showshleterAll() {
         return memberDao.showshleterAll();
     }

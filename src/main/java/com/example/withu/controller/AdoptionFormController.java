@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -33,13 +36,28 @@ public class AdoptionFormController {
             row.put("email", dto.getEmail());
             row.put("protectdogno", dto.getProtectdogno());
             row.put("sheltername", dto.getSheltername());
-            row.put("formwritetime", dto.getFormwritetime());
+            row.put("adoptiontime", dto.getFormwritetime());
             //row.put("timestamp", dto.getPostdate());
             // 배열에 추가
             // json배열.add(인덱스,json객체)
             jArray.add(i,row);
         }
         return jArray;
+    }
 
+    @RequestMapping(value = "/writeAdoptionForm", method = RequestMethod.POST)
+    public ModelAndView writeAdoptionForm(HttpServletRequest request) throws UnsupportedEncodingException {
+        System.out.println("입양확인서 작성 연결");
+        request.setCharacterEncoding("UTF-8");
+        AdoptionFromDTO adoptionFromDTO=new AdoptionFromDTO();
+        adoptionFromDTO.setEmail(request.getParameter("email"));
+        adoptionFromDTO.setProtectdogno(Integer.parseInt(request.getParameter("protectdogno")));
+        adoptionFromDTO.setSheltername(request.getParameter("sheltername"));
+
+        adoptionFormService.insertform(adoptionFromDTO);
+
+        ModelAndView result = new ModelAndView("redirect:/selectformlist/"+request.getParameter("sheltername"));
+
+        return result;
     }
 }

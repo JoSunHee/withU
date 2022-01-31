@@ -5,4 +5,8 @@
         select * from adoptionfrom where sheltername=#{sheltername}
     </select>
 
+    <insert id="insertform" parameterType="com.example.withu.dto.AdoptionFromDTO">
+        insert into adoptionfrom(email, protectdogno, sheltername) values (#{email},#{protectdogno},#{sheltername})
+    </insert>
+
 </mapper>

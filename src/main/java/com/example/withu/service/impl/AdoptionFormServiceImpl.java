@@ -19,4 +19,9 @@ public class AdoptionFormServiceImpl implements AdoptionFormService {
     public List<AdoptionFromDTO> selectformlistAll(String sheltername) {
         return adoptionFormDAO.selectformlistAll(sheltername);
     }
+
+    @Override
+    public void insertform(AdoptionFromDTO adoptionFromDTO) {
+        adoptionFormDAO.insertform(adoptionFromDTO);
+    }
 }
