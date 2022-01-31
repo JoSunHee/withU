@@ -128,6 +128,7 @@ public class MemberController {
             int type=memberService.membertypecheck(email);
             if(type==1){    //일반사용자가 로그인 했을 시 클라에게 보내줄 값
                 GenMemberDTO genMemberDTO=memberService.getGenMemberInfo(email);
+                jsonMain.put("nickname",genMemberDTO.getNickname());
                 jsonMain.put("password",password);
                 jsonMain.put("email",email);
                 System.out.println("type: "+type);
